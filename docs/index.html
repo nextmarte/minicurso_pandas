@@ -139,6 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#importando-o-pandas" id="toc-importando-o-pandas" class="nav-link" data-scroll-target="#importando-o-pandas">Importando o Pandas</a></li>
   <li><a href="#criando-um-data-frame-com-pandas-e-numpy" id="toc-criando-um-data-frame-com-pandas-e-numpy" class="nav-link" data-scroll-target="#criando-um-data-frame-com-pandas-e-numpy">Criando um data frame com pandas e numpy</a></li>
   <li><a href="#adicionar-e-manipular-variáveis-no-data-frame" id="toc-adicionar-e-manipular-variáveis-no-data-frame" class="nav-link" data-scroll-target="#adicionar-e-manipular-variáveis-no-data-frame">Adicionar e manipular variáveis no data frame</a></li>
+  <li><a href="#salvando-uma-coluna-do-data-frame-em-uma-variável" id="toc-salvando-uma-coluna-do-data-frame-em-uma-variável" class="nav-link" data-scroll-target="#salvando-uma-coluna-do-data-frame-em-uma-variável">Salvando uma coluna do data frame em uma variável</a></li>
   <li><a href="#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis" id="toc-selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis" class="nav-link" data-scroll-target="#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis">Selecionar a segunda e a terceira variavel do data frame com o índice das variáveis</a></li>
   <li><a href="#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis" id="toc-selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis" class="nav-link" data-scroll-target="#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis">Selecionar a segunda e a terceira variavel do data frame com o nome das variáveis</a></li>
   <li><a href="#selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas" id="toc-selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas" class="nav-link" data-scroll-target="#selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas">Selecionar as linhas do data frame com o índice das linhas</a></li>
@@ -190,6 +191,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="criando-um-data-frame-com-pandas-e-numpy" class="level2">
 <h2 class="anchored" data-anchor-id="criando-um-data-frame-com-pandas-e-numpy">Criando um data frame com pandas e numpy</h2>
 <p>Para criar um data frame com pandas e numpy, basta executar o comando abaixo:</p>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># criando um array com numpy notas vs horas de estudo</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -223,16 +228,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3                8     80
 4               10     90</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>&lt;Axes: title={'center': 'Notas x Horas de Estudo'}, xlabel='horas de estudo', ylabel='notas'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-3-output-3.png" width="585" height="449"></p>
 </div>
 </div>
+</details>
 </section>
 <section id="adicionar-e-manipular-variáveis-no-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="adicionar-e-manipular-variáveis-no-data-frame">Adicionar e manipular variáveis no data frame</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adiciona uma nova coluna ao data frame</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -248,7 +258,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4               10     90    45.0</code></pre>
 </div>
 </div>
-<p>## Salvando uma coluna do data frame em uma variável</p>
+</details>
+</section>
+<section id="salvando-uma-coluna-do-data-frame-em-uma-variável" class="level2">
+<h2 class="anchored" data-anchor-id="salvando-uma-coluna-do-data-frame-em-uma-variável">Salvando uma coluna do data frame em uma variável</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>notas <span class="op">=</span> data_frame[<span class="st">'notas'</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -262,9 +279,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Name: notas, dtype: int32</code></pre>
 </div>
 </div>
+</details>
 </section>
 <section id="selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis" class="level2">
 <h2 class="anchored" data-anchor-id="selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis">Selecionar a segunda e a terceira variavel do data frame com o índice das variáveis</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_frame2 <span class="op">=</span> data_frame.iloc[:, <span class="dv">1</span>:<span class="dv">3</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -278,9 +300,14 @@ Name: notas, dtype: int32</code></pre>
 4     90    45.0</code></pre>
 </div>
 </div>
+</details>
 </section>
 <section id="selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis" class="level2">
 <h2 class="anchored" data-anchor-id="selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis">Selecionar a segunda e a terceira variavel do data frame com o nome das variáveis</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_frame2 <span class="op">=</span> data_frame[[<span class="st">'notas'</span>, <span class="st">'notas2'</span>]]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -294,9 +321,14 @@ Name: notas, dtype: int32</code></pre>
 4     90    45.0</code></pre>
 </div>
 </div>
+</details>
 </section>
 <section id="selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas" class="level2">
 <h2 class="anchored" data-anchor-id="selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas">Selecionar as linhas do data frame com o índice das linhas</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleciona as linhas 1 e 2 do data frame</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -309,9 +341,14 @@ Name: notas, dtype: int32</code></pre>
 2                6     70    35.0</code></pre>
 </div>
 </div>
+</details>
 </section>
 <section id="filtranado-o-data-frame-com-base-em-uma-condição" class="level2">
 <h2 class="anchored" data-anchor-id="filtranado-o-data-frame-com-base-em-uma-condição">Filtranado o data frame com base em uma condição</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data_frame2 <span class="op">=</span> data_frame[data_frame[<span class="st">'notas'</span>] <span class="op">&gt;</span> <span class="dv">70</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -322,9 +359,14 @@ Name: notas, dtype: int32</code></pre>
 4               10     90    45.0</code></pre>
 </div>
 </div>
+</details>
 </section>
 <section id="filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador" class="level2">
 <h2 class="anchored" data-anchor-id="filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador">Filtranado o data frame com base em duas condições com o operador &amp;</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data_frame2 <span class="op">=</span> data_frame[(data_frame[<span class="st">'notas'</span>] <span class="op">&gt;</span> <span class="dv">70</span>) <span class="op">&amp;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                         (data_frame[<span class="st">'horas de estudo'</span>] <span class="op">&gt;</span> <span class="dv">8</span>)]</span>
@@ -335,12 +377,18 @@ Name: notas, dtype: int32</code></pre>
 4               10     90    45.0</code></pre>
 </div>
 </div>
+</details>
 </section>
 <section id="importando-um-arquivo-csv-para-o-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="importando-um-arquivo-csv-para-o-data-frame">Importando um arquivo csv para o data frame</h2>
+<details>
+<summary>
+Clique para ver o código
+</summary>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data_frame <span class="op">=</span> pd.read_csv(<span class="st">'data_frame.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</details>
 
 
 </section>

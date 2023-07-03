@@ -24,6 +24,10 @@ import pandas as pd
 
 Para criar um data frame com pandas e numpy, basta executar o comando abaixo:
 
+<details>
+
+<summary> Clique para ver o código </summary>
+
 ```{python}
 # criando um array com numpy notas vs horas de estudo
 
@@ -52,8 +56,13 @@ data_frame.plot(x='horas de estudo', y='notas', kind='scatter',
 
 ```
 
+</details>
 
 ## Adicionar e manipular variáveis no data frame
+
+<details>
+
+<summary> Clique para ver o código </summary>
 ```{python}
 
 # adiciona uma nova coluna ao data frame
@@ -64,8 +73,14 @@ print(data_frame)
 
 ```
 
+</details>
 
- ## Salvando uma coluna do data frame em uma variável
+## Salvando uma coluna do data frame em uma variável
+
+<details>
+
+<summary> Clique para ver o código </summary>
+
 ```{python}
 
 notas = data_frame['notas']
@@ -74,8 +89,13 @@ print(notas)
 
 ```
 
+</details>
 
 ## Selecionar a segunda e a terceira variavel do data frame com o índice das variáveis
+
+<details>
+
+<summary> Clique para ver o código </summary>
 ```{python}
 
 data_frame2 = data_frame.iloc[:, 1:3]
@@ -84,7 +104,13 @@ print(data_frame2)
 
 ```
 
+</details>
+
 ## Selecionar a segunda e a terceira variavel do data frame com o nome das variáveis
+
+<details>
+
+<summary> Clique para ver o código </summary>
 
 ```{python}
 
@@ -93,7 +119,13 @@ data_frame2 = data_frame[['notas', 'notas2']]
 print(data_frame2)
 ```
 
+</details>
+
 ## Selecionar as linhas do data frame com o índice das linhas
+
+<details>
+
+<summary> Clique para ver o código </summary>
 
 
 ```{python}
@@ -105,8 +137,13 @@ print(data_frame2)
 
 ```
 
+</details>
+
 ## Filtranado o data frame com base em uma condição
 
+<details>
+
+<summary> Clique para ver o código </summary>
 
 ```{python}
 
@@ -117,8 +154,13 @@ print(data_frame2)
 
 ```
 
+</details>
+
 ## Filtranado o data frame com base em duas condições com o operador &
 
+<details>
+
+<summary> Clique para ver o código </summary>
 
 ```{python}
 
@@ -130,8 +172,13 @@ print(data_frame2)
 
 ```
 
+</details>
+
 ## Importando um arquivo csv para o data frame
 
+<details>
+
+<summary> Clique para ver o código </summary>
 
 ```{python}
 # | eval: false
@@ -139,3 +186,5 @@ print(data_frame2)
 data_frame = pd.read_csv('data_frame.csv')
 
 ```
+
+</details>
