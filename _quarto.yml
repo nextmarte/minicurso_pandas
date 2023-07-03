@@ -5,7 +5,7 @@ project:
 website:
   title: "Minicurso de pandas"
   navbar:
-    left:
+    right:
       - href: index.qmd
 format:
   html:

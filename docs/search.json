@@ -4,76 +4,76 @@
     "href": "index.html",
     "title": "Minicurso Ultra Rápido de Pandas",
     "section": "",
-    "text": "O objetivo deste minicurso é apresentar os principais conceitos da biblioteca Pandas, que é uma das mais utilizadas para análise de dados em Python.\n\n\nPara instalar o Pandas, basta executar o comando abaixo no terminal: pip install pandas\n\n\n\nPara importar o Pandas e numpy, basta executar o comando abaixo:\n\nimport numpy as np\nimport pandas as pd\n\n\n\n\nPara criar um data frame com pandas e numpy, basta executar o comando abaixo:\n\n# criando um array com numpy notas vs horas de estudo\n\narray = np.array([[2, 50], [4, 60], [6, 70], [8, 80], [10, 90]])\n\n# cria as variáveis para o data frame\n\nvariaveis = ['horas de estudo', 'notas']\n\n# cria o data frame\n\ndata_frame = pd.DataFrame(array, columns=variaveis)\n\n# imprime o data frame\n\nprint(data_frame)\n\n# plota o gráfico\n\ndata_frame.plot(x='horas de estudo', y='notas', kind='scatter',\n                title='Notas x Horas de Estudo')\n\n# exporta pro excel com a biblioteca openpyxl\n\n# data_frame.to_excel('data_frame.xlsx', sheet_name='data_frame')\n\n   horas de estudo  notas\n0                2     50\n1                4     60\n2                6     70\n3                8     80\n4               10     90\n\n\n&lt;Axes: title={'center': 'Notas x Horas de Estudo'}, xlabel='horas de estudo', ylabel='notas'&gt;\n\n\n\n\n\n\n\n\n\n# adiciona uma nova coluna ao data frame\n\ndata_frame['notas2'] = data_frame['notas']/2\n\nprint(data_frame)\n\n   horas de estudo  notas  notas2\n0                2     50    25.0\n1                4     60    30.0\n2                6     70    35.0\n3                8     80    40.0\n4               10     90    45.0\n\n\n## Salvando uma coluna do data frame em uma variável\n\nnotas = data_frame['notas']\n\nprint(notas)\n\n0    50\n1    60\n2    70\n3    80\n4    90\nName: notas, dtype: int32\n\n\n\n\n\n\ndata_frame2 = data_frame.iloc[:, 1:3]\n\nprint(data_frame2)\n\n   notas  notas2\n0     50    25.0\n1     60    30.0\n2     70    35.0\n3     80    40.0\n4     90    45.0\n\n\n\n\n\n\ndata_frame2 = data_frame[['notas', 'notas2']]\n\nprint(data_frame2)\n\n   notas  notas2\n0     50    25.0\n1     60    30.0\n2     70    35.0\n3     80    40.0\n4     90    45.0\n\n\n\n\n\n\n# seleciona as linhas 1 e 2 do data frame\n\ndata_frame2 = data_frame.iloc[1:3, :]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n1                4     60    30.0\n2                6     70    35.0\n\n\n\n\n\n\ndata_frame2 = data_frame[data_frame['notas'] &gt; 70]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n3                8     80    40.0\n4               10     90    45.0\n\n\n\n\n\n\ndata_frame2 = data_frame[(data_frame['notas'] &gt; 70) &\n                         (data_frame['horas de estudo'] &gt; 8)]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n4               10     90    45.0\n\n\n\n\n\n\ndata_frame = pd.read_csv('data_frame.csv')"
+    "text": "O objetivo deste minicurso é apresentar os principais conceitos da biblioteca Pandas, que é uma das mais utilizadas para análise de dados em Python."
   },
   {
     "objectID": "index.html#instalação",
     "href": "index.html#instalação",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "Para instalar o Pandas, basta executar o comando abaixo no terminal: pip install pandas"
+    "section": "Instalação",
+    "text": "Instalação\nPara instalar o Pandas, basta executar o comando abaixo no terminal: pip install pandas"
   },
   {
     "objectID": "index.html#importando-o-pandas",
     "href": "index.html#importando-o-pandas",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "Para importar o Pandas e numpy, basta executar o comando abaixo:\n\nimport numpy as np\nimport pandas as pd"
+    "section": "Importando o Pandas",
+    "text": "Importando o Pandas\nPara importar o Pandas e numpy, basta executar o comando abaixo:\n\nimport numpy as np\nimport pandas as pd"
   },
   {
     "objectID": "index.html#criando-um-data-frame-com-pandas-e-numpy",
     "href": "index.html#criando-um-data-frame-com-pandas-e-numpy",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "Para criar um data frame com pandas e numpy, basta executar o comando abaixo:\n\n# criando um array com numpy notas vs horas de estudo\n\narray = np.array([[2, 50], [4, 60], [6, 70], [8, 80], [10, 90]])\n\n# cria as variáveis para o data frame\n\nvariaveis = ['horas de estudo', 'notas']\n\n# cria o data frame\n\ndata_frame = pd.DataFrame(array, columns=variaveis)\n\n# imprime o data frame\n\nprint(data_frame)\n\n# plota o gráfico\n\ndata_frame.plot(x='horas de estudo', y='notas', kind='scatter',\n                title='Notas x Horas de Estudo')\n\n# exporta pro excel com a biblioteca openpyxl\n\n# data_frame.to_excel('data_frame.xlsx', sheet_name='data_frame')\n\n   horas de estudo  notas\n0                2     50\n1                4     60\n2                6     70\n3                8     80\n4               10     90\n\n\n&lt;Axes: title={'center': 'Notas x Horas de Estudo'}, xlabel='horas de estudo', ylabel='notas'&gt;"
+    "section": "Criando um data frame com pandas e numpy",
+    "text": "Criando um data frame com pandas e numpy\nPara criar um data frame com pandas e numpy, basta executar o comando abaixo:\n\n# criando um array com numpy notas vs horas de estudo\n\narray = np.array([[2, 50], [4, 60], [6, 70], [8, 80], [10, 90]])\n\n# cria as variáveis para o data frame\n\nvariaveis = ['horas de estudo', 'notas']\n\n# cria o data frame\n\ndata_frame = pd.DataFrame(array, columns=variaveis)\n\n# imprime o data frame\n\nprint(data_frame)\n\n# plota o gráfico\n\ndata_frame.plot(x='horas de estudo', y='notas', kind='scatter',\n                title='Notas x Horas de Estudo')\n\n# exporta pro excel com a biblioteca openpyxl\n\n# data_frame.to_excel('data_frame.xlsx', sheet_name='data_frame')\n\n   horas de estudo  notas\n0                2     50\n1                4     60\n2                6     70\n3                8     80\n4               10     90\n\n\n&lt;Axes: title={'center': 'Notas x Horas de Estudo'}, xlabel='horas de estudo', ylabel='notas'&gt;"
   },
   {
     "objectID": "index.html#adicionar-e-manipular-variáveis-no-data-frame",
     "href": "index.html#adicionar-e-manipular-variáveis-no-data-frame",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "# adiciona uma nova coluna ao data frame\n\ndata_frame['notas2'] = data_frame['notas']/2\n\nprint(data_frame)\n\n   horas de estudo  notas  notas2\n0                2     50    25.0\n1                4     60    30.0\n2                6     70    35.0\n3                8     80    40.0\n4               10     90    45.0\n\n\n## Salvando uma coluna do data frame em uma variável\n\nnotas = data_frame['notas']\n\nprint(notas)\n\n0    50\n1    60\n2    70\n3    80\n4    90\nName: notas, dtype: int32"
+    "section": "Adicionar e manipular variáveis no data frame",
+    "text": "Adicionar e manipular variáveis no data frame\n\n# adiciona uma nova coluna ao data frame\n\ndata_frame['notas2'] = data_frame['notas']/2\n\nprint(data_frame)\n\n   horas de estudo  notas  notas2\n0                2     50    25.0\n1                4     60    30.0\n2                6     70    35.0\n3                8     80    40.0\n4               10     90    45.0\n\n\n## Salvando uma coluna do data frame em uma variável\n\nnotas = data_frame['notas']\n\nprint(notas)\n\n0    50\n1    60\n2    70\n3    80\n4    90\nName: notas, dtype: int32"
   },
   {
     "objectID": "index.html#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis",
     "href": "index.html#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-índice-das-variáveis",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "data_frame2 = data_frame.iloc[:, 1:3]\n\nprint(data_frame2)\n\n   notas  notas2\n0     50    25.0\n1     60    30.0\n2     70    35.0\n3     80    40.0\n4     90    45.0"
+    "section": "Selecionar a segunda e a terceira variavel do data frame com o índice das variáveis",
+    "text": "Selecionar a segunda e a terceira variavel do data frame com o índice das variáveis\n\ndata_frame2 = data_frame.iloc[:, 1:3]\n\nprint(data_frame2)\n\n   notas  notas2\n0     50    25.0\n1     60    30.0\n2     70    35.0\n3     80    40.0\n4     90    45.0"
   },
   {
     "objectID": "index.html#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis",
     "href": "index.html#selecionar-a-segunda-e-a-terceira-variavel-do-data-frame-com-o-nome-das-variáveis",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "data_frame2 = data_frame[['notas', 'notas2']]\n\nprint(data_frame2)\n\n   notas  notas2\n0     50    25.0\n1     60    30.0\n2     70    35.0\n3     80    40.0\n4     90    45.0"
+    "section": "Selecionar a segunda e a terceira variavel do data frame com o nome das variáveis",
+    "text": "Selecionar a segunda e a terceira variavel do data frame com o nome das variáveis\n\ndata_frame2 = data_frame[['notas', 'notas2']]\n\nprint(data_frame2)\n\n   notas  notas2\n0     50    25.0\n1     60    30.0\n2     70    35.0\n3     80    40.0\n4     90    45.0"
   },
   {
     "objectID": "index.html#selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas",
     "href": "index.html#selecionar-as-linhas-do-data-frame-com-o-índice-das-linhas",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "# seleciona as linhas 1 e 2 do data frame\n\ndata_frame2 = data_frame.iloc[1:3, :]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n1                4     60    30.0\n2                6     70    35.0"
+    "section": "Selecionar as linhas do data frame com o índice das linhas",
+    "text": "Selecionar as linhas do data frame com o índice das linhas\n\n# seleciona as linhas 1 e 2 do data frame\n\ndata_frame2 = data_frame.iloc[1:3, :]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n1                4     60    30.0\n2                6     70    35.0"
   },
   {
     "objectID": "index.html#filtranado-o-data-frame-com-base-em-uma-condição",
     "href": "index.html#filtranado-o-data-frame-com-base-em-uma-condição",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "data_frame2 = data_frame[data_frame['notas'] &gt; 70]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n3                8     80    40.0\n4               10     90    45.0"
+    "section": "Filtranado o data frame com base em uma condição",
+    "text": "Filtranado o data frame com base em uma condição\n\ndata_frame2 = data_frame[data_frame['notas'] &gt; 70]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n3                8     80    40.0\n4               10     90    45.0"
   },
   {
     "objectID": "index.html#filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador",
     "href": "index.html#filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "data_frame2 = data_frame[(data_frame['notas'] &gt; 70) &\n                         (data_frame['horas de estudo'] &gt; 8)]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n4               10     90    45.0"
+    "section": "Filtranado o data frame com base em duas condições com o operador &",
+    "text": "Filtranado o data frame com base em duas condições com o operador &\n\ndata_frame2 = data_frame[(data_frame['notas'] &gt; 70) &\n                         (data_frame['horas de estudo'] &gt; 8)]\n\nprint(data_frame2)\n\n   horas de estudo  notas  notas2\n4               10     90    45.0"
   },
   {
     "objectID": "index.html#importando-um-arquivo-csv-para-o-data-frame",
     "href": "index.html#importando-um-arquivo-csv-para-o-data-frame",
     "title": "Minicurso Ultra Rápido de Pandas",
-    "section": "",
-    "text": "data_frame = pd.read_csv('data_frame.csv')"
+    "section": "Importando um arquivo csv para o data frame",
+    "text": "Importando um arquivo csv para o data frame\n\ndata_frame = pd.read_csv('data_frame.csv')"
   }
 ]
