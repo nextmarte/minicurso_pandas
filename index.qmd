@@ -1,0 +1,144 @@
+---
+title: "Minicurso Ultra Rápido de Pandas"
+author: "Marcus Ramalho"
+editor: "visual"
+---
+
+# Minicurso Ultra Rápido de Pandas
+
+O objetivo deste minicurso é apresentar os principais conceitos da biblioteca Pandas, que é uma das mais utilizadas para análise de dados em Python.
+
+## Instalação
+
+Para instalar o Pandas, basta executar o comando abaixo no terminal: 
+`pip install pandas`
+
+## Importando o Pandas
+
+Para importar o Pandas e numpy, basta executar o comando abaixo:
+
+```{python}
+import numpy as np
+import pandas as pd
+
+```
+
+## Criando um data frame com pandas e numpy 
+
+Para criar um data frame com pandas e numpy, basta executar o comando abaixo:
+
+```{python}
+# criando um array com numpy notas vs horas de estudo
+
+array = np.array([[2, 50], [4, 60], [6, 70], [8, 80], [10, 90]])
+
+# cria as variáveis para o data frame
+
+variaveis = ['horas de estudo', 'notas']
+
+# cria o data frame
+
+data_frame = pd.DataFrame(array, columns=variaveis)
+
+# imprime o data frame
+
+print(data_frame)
+
+# plota o gráfico
+
+data_frame.plot(x='horas de estudo', y='notas', kind='scatter',
+                title='Notas x Horas de Estudo')
+
+# exporta pro excel com a biblioteca openpyxl
+
+# data_frame.to_excel('data_frame.xlsx', sheet_name='data_frame')
+
+```
+
+
+## Adicionar e manipular variáveis no data frame
+```{python}
+
+# adiciona uma nova coluna ao data frame
+
+data_frame['notas2'] = data_frame['notas']/2
+
+print(data_frame)
+
+```
+
+
+ ## Salvando uma coluna do data frame em uma variável
+```{python}
+
+notas = data_frame['notas']
+
+print(notas)
+
+```
+
+
+## Selecionar a segunda e a terceira variavel do data frame com o índice das variáveis
+```{python}
+
+data_frame2 = data_frame.iloc[:, 1:3]
+
+print(data_frame2)
+
+```
+
+## Selecionar a segunda e a terceira variavel do data frame com o nome das variáveis
+
+```{python}
+
+data_frame2 = data_frame[['notas', 'notas2']]
+
+print(data_frame2)
+```
+
+## Selecionar as linhas do data frame com o índice das linhas
+
+
+```{python}
+# seleciona as linhas 1 e 2 do data frame
+
+data_frame2 = data_frame.iloc[1:3, :]
+
+print(data_frame2)
+
+```
+
+## Filtranado o data frame com base em uma condição
+
+
+```{python}
+
+
+data_frame2 = data_frame[data_frame['notas'] > 70]
+
+print(data_frame2)
+
+```
+
+## Filtranado o data frame com base em duas condições com o operador &
+
+
+```{python}
+
+
+data_frame2 = data_frame[(data_frame['notas'] > 70) &
+                         (data_frame['horas de estudo'] > 8)]
+
+print(data_frame2)
+
+```
+
+## Importando um arquivo csv para o data frame
+
+
+```{python}
+# | eval: false
+
+data_frame = pd.read_csv('data_frame.csv')
+
+```
