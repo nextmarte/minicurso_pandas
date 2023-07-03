@@ -231,7 +231,7 @@ print(data_frame3)
 
 ```
 
-</details>
+
 
 ## agora vamos plotar um gráfico de barras com o data frame
 
@@ -244,6 +244,8 @@ data_frame3.plot(x='Média', y=variaveis, kind='bar',
 
 
 ```
+
+</details>
 
 <!-- gerado com metathis -->
 
