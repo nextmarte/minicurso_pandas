@@ -147,6 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador" id="toc-filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador" class="nav-link" data-scroll-target="#filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador">Filtranado o data frame com base em duas condições com o operador &amp;</a></li>
   <li><a href="#importando-um-arquivo-csv-para-o-data-frame" id="toc-importando-um-arquivo-csv-para-o-data-frame" class="nav-link" data-scroll-target="#importando-um-arquivo-csv-para-o-data-frame">Importando um arquivo csv para o data frame</a></li>
   <li><a href="#exercício" id="toc-exercício" class="nav-link" data-scroll-target="#exercício">Exercício</a></li>
+  <li><a href="#agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame" id="toc-agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame" class="nav-link" data-scroll-target="#agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame">agora vamos plotar um gráfico de barras com o data frame</a></li>
   </ul>
 </nav>
     </div>
@@ -404,10 +405,11 @@ Dica!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Use a função <code>np.random.randint</code> para gerar os números aleatórios.</p>
+<p>Use a função <code>np.random.randint</code> para gerar os números aleatórios. Aproveite e explique essa função.</p>
 </div>
 </div>
-<p>Resposta</p>
+<p>Depois de criar o data frame, crie uma nova variável chamada “Média” que contenha a média das notas de cada observação.</p>
+<p>Respostas</p>
 <details>
 <summary>
 Clique para ver a resposta
@@ -425,15 +427,34 @@ Clique para ver a resposta
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>data_frame3 <span class="op">=</span> pd.DataFrame(array, columns<span class="op">=</span>variaveis)</span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_frame3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># cria a variável média</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>data_frame3[<span class="st">'Média'</span>] <span class="op">=</span> data_frame3.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_frame3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Maria  Joao  Pedro  Marcus
-0     93    87     26      41
-1      1    83     69      53
-2     80    25     89      73</code></pre>
+<pre><code>   Maria  Joao  Pedro  Marcus  Média
+0     65    31     39      85  55.00
+1     64    29     98       9  50.00
+2     33    86     50      36  51.25</code></pre>
 </div>
 </div>
-</details>
+</details></section>
+<section id="agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame" class="level2">
+<h2 class="anchored" data-anchor-id="agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame">agora vamos plotar um gráfico de barras com o data frame</h2>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plota o gráfico</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>data_frame3.plot(x<span class="op">=</span><span class="st">'Média'</span>, y<span class="op">=</span>variaveis, kind<span class="op">=</span><span class="st">'bar'</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                 title<span class="op">=</span><span class="st">'Notas x Alunos'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>&lt;Axes: title={'center': 'Notas x Alunos'}, xlabel='Média'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-13-output-2.png" width="575" height="475"></p>
+</div>
+</div>
+
 <!-- gerado com metathis -->
 <meta name="github-repo" content="github.com/nextmarte/minicurso_pandas">
 <meta name="twitter:title" content="Minicurso de pandas - Minicurso Ultra Rápido de Pandas">

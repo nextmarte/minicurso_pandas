@@ -88,6 +88,13 @@
     "href": "index.html#exercício",
     "title": "Minicurso Ultra Rápido de Pandas",
     "section": "Exercício",
-    "text": "Exercício\nCrie um data frame 3x4 com as seguintes variáveis: Maria, Joao, Pedro e Marcus. Cada observação deverá conter um número aleatório de 0 a 100. Depois, crie uma nova variável chamada “Média” que contenha a média das notas de cada observação. Por fim, salve o data frame em um arquivo csv.\n\n\n\n\n\n\nDica!\n\n\n\nUse a função np.random.randint para gerar os números aleatórios.\n\n\nResposta\n\n\nClique para ver a resposta\n\n\n# vamos criar um array com numpy\n\narray = np.random.randint(0, 100, size=(3, 4))\n\n# cria as variáveis para o data frame\n\nvariaveis = ['Maria', 'Joao', 'Pedro', 'Marcus']\n\n# cria o data frame\n\ndata_frame3 = pd.DataFrame(array, columns=variaveis)\n\nprint(data_frame3)\n\n   Maria  Joao  Pedro  Marcus\n0     93    87     26      41\n1      1    83     69      53\n2     80    25     89      73"
+    "text": "Exercício\nCrie um data frame 3x4 com as seguintes variáveis: Maria, Joao, Pedro e Marcus. Cada observação deverá conter um número aleatório de 0 a 100. Depois, crie uma nova variável chamada “Média” que contenha a média das notas de cada observação. Por fim, salve o data frame em um arquivo csv.\n\n\n\n\n\n\nDica!\n\n\n\nUse a função np.random.randint para gerar os números aleatórios. Aproveite e explique essa função.\n\n\nDepois de criar o data frame, crie uma nova variável chamada “Média” que contenha a média das notas de cada observação.\nRespostas\n\n\nClique para ver a resposta\n\n\n# vamos criar um array com numpy\n\narray = np.random.randint(0, 100, size=(3, 4))\n\n# cria as variáveis para o data frame\n\nvariaveis = ['Maria', 'Joao', 'Pedro', 'Marcus']\n\n# cria o data frame\n\ndata_frame3 = pd.DataFrame(array, columns=variaveis)\n\n# cria a variável média\n\ndata_frame3['Média'] = data_frame3.mean(axis=1)\n\nprint(data_frame3)\n\n   Maria  Joao  Pedro  Marcus  Média\n0     65    31     39      85  55.00\n1     64    29     98       9  50.00\n2     33    86     50      36  51.25"
+  },
+  {
+    "objectID": "index.html#agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame",
+    "href": "index.html#agora-vamos-plotar-um-gráfico-de-barras-com-o-data-frame",
+    "title": "Minicurso Ultra Rápido de Pandas",
+    "section": "agora vamos plotar um gráfico de barras com o data frame",
+    "text": "agora vamos plotar um gráfico de barras com o data frame\n\n# plota o gráfico\n\ndata_frame3.plot(x='Média', y=variaveis, kind='bar',\n                 title='Notas x Alunos')\n\n&lt;Axes: title={'center': 'Notas x Alunos'}, xlabel='Média'&gt;"
   }
 ]
