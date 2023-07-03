@@ -203,7 +203,7 @@ Use a função `np.random.randint` para gerar os números aleatórios. Aproveite
 
 Depois de criar o data frame, crie uma nova variável chamada "Média" que contenha a média das notas de cada observação.
 
-Resposta
+Respostas
  
 <details>
 
@@ -240,7 +240,6 @@ print(data_frame3)
 
 data_frame3.plot(x='Média', y=variaveis, kind='bar',
                  title='Notas x Alunos')
-
 
 
 ```
