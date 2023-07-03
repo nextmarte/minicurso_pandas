@@ -3,6 +3,9 @@ title: "Minicurso Ultra Rápido de Pandas"
 author: "Marcus Ramalho"
 editor: "visual"
 ---
+
+
+
 O objetivo deste minicurso é apresentar os principais conceitos da biblioteca Pandas, que é uma das mais utilizadas para análise de dados em Python.
 
 ## Instalação
@@ -15,6 +18,7 @@ Para instalar o Pandas, basta executar o comando abaixo no terminal:
 Para importar o Pandas e numpy, basta executar o comando abaixo:
 
 ```{python}
+
 import numpy as np
 import pandas as pd
 
@@ -188,3 +192,23 @@ data_frame = pd.read_csv('data_frame.csv')
 ```
 
 </details>
+
+<!-- gerado com metathis -->
+
+<meta name="github-repo" content="github.com/nextmarte/minicurso_pandas"/>
+<meta name="twitter:title" content="Minicurso Pandas"/>
+<meta name="twitter:description" content="Minicurso introdutório sobre a biblioteca Pandas para análise de dados em Python."/>
+<meta name="twitter:url" content="https://nextmarte.github.io/minicurso_pandas/"/>
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/26266722?v=4"/>
+<meta name="twitter:image:alt" content="Marcus Ramalho"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:creator" content="@nextmarcus"/>
+<meta name="twitter:site" content="@nextmarcus"/>
+<meta property="og:title" content="Minicurso Pandas"/>
+<meta property="og:description" content="Minicurso introdutório sobre a biblioteca Pandas para análise de dados em Python."/>
+<meta property="og:url" content="https://nextmarte.github.io/minicurso_pandas/"/>
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/26266722?v=4"/>
+<meta property="og:image:alt" content="Marcus Ramalho"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="article:author" content="Marcus Ramalho"/>
