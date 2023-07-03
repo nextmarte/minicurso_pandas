@@ -3,9 +3,6 @@ title: "Minicurso Ultra Rápido de Pandas"
 author: "Marcus Ramalho"
 editor: "visual"
 ---
-
-# Minicurso Ultra Rápido de Pandas
-
 O objetivo deste minicurso é apresentar os principais conceitos da biblioteca Pandas, que é uma das mais utilizadas para análise de dados em Python.
 
 ## Instalação
