@@ -75,12 +75,5 @@
     "title": "Minicurso Ultra Rápido de Pandas",
     "section": "",
     "text": "data_frame = pd.read_csv('data_frame.csv')"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
