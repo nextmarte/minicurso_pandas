@@ -146,6 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filtranado-o-data-frame-com-base-em-uma-condição" id="toc-filtranado-o-data-frame-com-base-em-uma-condição" class="nav-link" data-scroll-target="#filtranado-o-data-frame-com-base-em-uma-condição">Filtranado o data frame com base em uma condição</a></li>
   <li><a href="#filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador" id="toc-filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador" class="nav-link" data-scroll-target="#filtranado-o-data-frame-com-base-em-duas-condições-com-o-operador">Filtranado o data frame com base em duas condições com o operador &amp;</a></li>
   <li><a href="#importando-um-arquivo-csv-para-o-data-frame" id="toc-importando-um-arquivo-csv-para-o-data-frame" class="nav-link" data-scroll-target="#importando-um-arquivo-csv-para-o-data-frame">Importando um arquivo csv para o data frame</a></li>
+  <li><a href="#exercício" id="toc-exercício" class="nav-link" data-scroll-target="#exercício">Exercício</a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +229,7 @@ Clique para ver o código
 3                8     80
 4               10     90</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>&lt;Axes: title={'center': 'Notas x Horas de Estudo'}, xlabel='horas de estudo', ylabel='notas'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -387,6 +388,50 @@ Clique para ver o código
 </summary>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data_frame <span class="op">=</span> pd.read_csv(<span class="st">'data_frame.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+</section>
+<section id="exercício" class="level2">
+<h2 class="anchored" data-anchor-id="exercício">Exercício</h2>
+<p>Crie um data frame 3x4 com as seguintes variáveis: Maria, Joao, Pedro e Marcus. Cada observação deverá conter um número aleatório de 0 a 100. Depois, crie uma nova variável chamada “Média” que contenha a média das notas de cada observação. Por fim, salve o data frame em um arquivo csv.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dica!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use a função <code>np.random.randint</code> para gerar os números aleatórios.</p>
+</div>
+</div>
+<p>Resposta</p>
+<details>
+<summary>
+Clique para ver a resposta
+</summary>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vamos criar um array com numpy</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">100</span>, size<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cria as variáveis para o data frame</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>variaveis <span class="op">=</span> [<span class="st">'Maria'</span>, <span class="st">'Joao'</span>, <span class="st">'Pedro'</span>, <span class="st">'Marcus'</span>]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># cria o data frame</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>data_frame3 <span class="op">=</span> pd.DataFrame(array, columns<span class="op">=</span>variaveis)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_frame3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Maria  Joao  Pedro  Marcus
+0     93    87     26      41
+1      1    83     69      53
+2     80    25     89      73</code></pre>
+</div>
 </div>
 </details>
 <!-- gerado com metathis -->

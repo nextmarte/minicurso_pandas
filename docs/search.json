@@ -82,5 +82,12 @@
     "title": "Minicurso Ultra Rápido de Pandas",
     "section": "Importando um arquivo csv para o data frame",
     "text": "Importando um arquivo csv para o data frame\n\n\nClique para ver o código\n\n\ndata_frame = pd.read_csv('data_frame.csv')"
+  },
+  {
+    "objectID": "index.html#exercício",
+    "href": "index.html#exercício",
+    "title": "Minicurso Ultra Rápido de Pandas",
+    "section": "Exercício",
+    "text": "Exercício\nCrie um data frame 3x4 com as seguintes variáveis: Maria, Joao, Pedro e Marcus. Cada observação deverá conter um número aleatório de 0 a 100. Depois, crie uma nova variável chamada “Média” que contenha a média das notas de cada observação. Por fim, salve o data frame em um arquivo csv.\n\n\n\n\n\n\nDica!\n\n\n\nUse a função np.random.randint para gerar os números aleatórios.\n\n\nResposta\n\n\nClique para ver a resposta\n\n\n# vamos criar um array com numpy\n\narray = np.random.randint(0, 100, size=(3, 4))\n\n# cria as variáveis para o data frame\n\nvariaveis = ['Maria', 'Joao', 'Pedro', 'Marcus']\n\n# cria o data frame\n\ndata_frame3 = pd.DataFrame(array, columns=variaveis)\n\nprint(data_frame3)\n\n   Maria  Joao  Pedro  Marcus\n0     93    87     26      41\n1      1    83     69      53\n2     80    25     89      73"
   }
 ]

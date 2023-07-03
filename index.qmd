@@ -4,14 +4,11 @@ author: "Marcus Ramalho"
 editor: "visual"
 ---
 
-
-
 O objetivo deste minicurso é apresentar os principais conceitos da biblioteca Pandas, que é uma das mais utilizadas para análise de dados em Python.
 
 ## Instalação
 
-Para instalar o Pandas, basta executar o comando abaixo no terminal: 
-`pip install pandas`
+Para instalar o Pandas, basta executar o comando abaixo no terminal: `pip install pandas`
 
 ## Importando o Pandas
 
@@ -24,13 +21,13 @@ import pandas as pd
 
 ```
 
-## Criando um data frame com pandas e numpy 
+## Criando um data frame com pandas e numpy
 
 Para criar um data frame com pandas e numpy, basta executar o comando abaixo:
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
 
 ```{python}
 # criando um array com numpy notas vs horas de estudo
@@ -66,7 +63,8 @@ data_frame.plot(x='horas de estudo', y='notas', kind='scatter',
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
+
 ```{python}
 
 # adiciona uma nova coluna ao data frame
@@ -83,7 +81,7 @@ print(data_frame)
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
 
 ```{python}
 
@@ -99,7 +97,8 @@ print(notas)
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
+
 ```{python}
 
 data_frame2 = data_frame.iloc[:, 1:3]
@@ -114,7 +113,7 @@ print(data_frame2)
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
 
 ```{python}
 
@@ -129,8 +128,7 @@ print(data_frame2)
 
 <details>
 
-<summary> Clique para ver o código </summary>
-
+<summary>Clique para ver o código</summary>
 
 ```{python}
 # seleciona as linhas 1 e 2 do data frame
@@ -147,7 +145,7 @@ print(data_frame2)
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
 
 ```{python}
 
@@ -164,7 +162,7 @@ print(data_frame2)
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
 
 ```{python}
 
@@ -182,7 +180,7 @@ print(data_frame2)
 
 <details>
 
-<summary> Clique para ver o código </summary>
+<summary>Clique para ver o código</summary>
 
 ```{python}
 # | eval: false
@@ -193,22 +191,92 @@ data_frame = pd.read_csv('data_frame.csv')
 
 </details>
 
+## Exercício
+
+Crie um data frame 3x4 com as seguintes variáveis: Maria, Joao, Pedro e Marcus. Cada observação deverá conter um número aleatório de 0 a 100. Depois, crie uma nova variável chamada "Média" que contenha a média das notas de cada observação. Por fim, salve o data frame em um arquivo csv.
+
+::: {.callout-tip appearance="minimal"}
+## Dica!
+
+Use a função `np.random.randint` para gerar os números aleatórios. Aproveite e explique essa função.
+:::
+
+Depois de criar o data frame, crie uma nova variável chamada "Média" que contenha a média das notas de cada observação.
+
+Resposta
+
+<details>
+
+<summary>Clique para ver a resposta</summary>
+
+```{python}
+# vamos criar um array com numpy
+
+array = np.random.randint(0, 100, size=(3, 4))
+
+# cria as variáveis para o data frame
+
+variaveis = ['Maria', 'Joao', 'Pedro', 'Marcus']
+
+# cria o data frame
+
+data_frame3 = pd.DataFrame(array, columns=variaveis)
+
+# cria a variável média
+
+data_frame3['Média'] = data_frame3.mean(axis=1)
+
+print(data_frame3)
+
+
+```
+
+</details>
+
+## agora vamos plotar um gráfico de barras com o data frame
+
+```{python}
+# plota o gráfico
+
+data_frame3.plot(x='Média', y=variaveis, kind='bar',
+                 title='Notas x Alunos')
+
+
+
+```
+
 <!-- gerado com metathis -->
 
 <meta name="github-repo" content="github.com/nextmarte/minicurso_pandas"/>
+
 <meta name="twitter:title" content="Minicurso Pandas"/>
+
 <meta name="twitter:description" content="Minicurso introdutório sobre a biblioteca Pandas para análise de dados em Python."/>
+
 <meta name="twitter:url" content="https://nextmarte.github.io/minicurso_pandas/"/>
+
 <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/26266722?v=4"/>
+
 <meta name="twitter:image:alt" content="Marcus Ramalho"/>
+
 <meta name="twitter:card" content="summary_large_image"/>
+
 <meta name="twitter:creator" content="@nextmarcus"/>
+
 <meta name="twitter:site" content="@nextmarcus"/>
+
 <meta property="og:title" content="Minicurso Pandas"/>
+
 <meta property="og:description" content="Minicurso introdutório sobre a biblioteca Pandas para análise de dados em Python."/>
+
 <meta property="og:url" content="https://nextmarte.github.io/minicurso_pandas/"/>
+
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/26266722?v=4"/>
+
 <meta property="og:image:alt" content="Marcus Ramalho"/>
+
 <meta property="og:type" content="website"/>
+
 <meta property="og:locale" content="en_US"/>
+
 <meta property="article:author" content="Marcus Ramalho"/>
