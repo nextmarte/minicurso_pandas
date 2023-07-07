@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.326">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Minicurso de pandas – eda</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Minicurso de pandas</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Minicurso Ultra Rápido de Pandas</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.float_format'</span>,<span class="kw">lambda</span> x: <span class="st">'</span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span><span class="op">=</span><span class="st">'https://raw.githubusercontent.com/AlexTheAnalyst/PandasYouTubeSeries/main/world_population.csv'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#lendo o arquivo csv direto do github e criando um dataframe</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="bu">file</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Rank</th>
+<th data-quarto-table-cell-role="th">CCA3</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Capital</th>
+<th data-quarto-table-cell-role="th">Continent</th>
+<th data-quarto-table-cell-role="th">2022 Population</th>
+<th data-quarto-table-cell-role="th">2020 Population</th>
+<th data-quarto-table-cell-role="th">2015 Population</th>
+<th data-quarto-table-cell-role="th">2010 Population</th>
+<th data-quarto-table-cell-role="th">2000 Population</th>
+<th data-quarto-table-cell-role="th">1990 Population</th>
+<th data-quarto-table-cell-role="th">1980 Population</th>
+<th data-quarto-table-cell-role="th">1970 Population</th>
+<th data-quarto-table-cell-role="th">Area (km²)</th>
+<th data-quarto-table-cell-role="th">Density (per km²)</th>
+<th data-quarto-table-cell-role="th">Growth Rate</th>
+<th data-quarto-table-cell-role="th">World Population Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>36</td>
+<td>AFG</td>
+<td>Afghanistan</td>
+<td>Kabul</td>
+<td>Asia</td>
+<td>41128771.00</td>
+<td>38972230.00</td>
+<td>33753499.00</td>
+<td>28189672.00</td>
+<td>19542982.00</td>
+<td>10694796.00</td>
+<td>12486631.00</td>
+<td>10752971.00</td>
+<td>652230.00</td>
+<td>63.06</td>
+<td>1.03</td>
+<td>0.52</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>138</td>
+<td>ALB</td>
+<td>Albania</td>
+<td>Tirana</td>
+<td>Europe</td>
+<td>2842321.00</td>
+<td>2866849.00</td>
+<td>2882481.00</td>
+<td>2913399.00</td>
+<td>3182021.00</td>
+<td>3295066.00</td>
+<td>2941651.00</td>
+<td>2324731.00</td>
+<td>28748.00</td>
+<td>98.87</td>
+<td>1.00</td>
+<td>0.04</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>34</td>
+<td>DZA</td>
+<td>Algeria</td>
+<td>Algiers</td>
+<td>Africa</td>
+<td>44903225.00</td>
+<td>43451666.00</td>
+<td>39543154.00</td>
+<td>35856344.00</td>
+<td>30774621.00</td>
+<td>25518074.00</td>
+<td>18739378.00</td>
+<td>13795915.00</td>
+<td>2381741.00</td>
+<td>18.85</td>
+<td>1.02</td>
+<td>0.56</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>213</td>
+<td>ASM</td>
+<td>American Samoa</td>
+<td>Pago Pago</td>
+<td>Oceania</td>
+<td>44273.00</td>
+<td>46189.00</td>
+<td>51368.00</td>
+<td>54849.00</td>
+<td>58230.00</td>
+<td>47818.00</td>
+<td>32886.00</td>
+<td>27075.00</td>
+<td>199.00</td>
+<td>222.48</td>
+<td>0.98</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>203</td>
+<td>AND</td>
+<td>Andorra</td>
+<td>Andorra la Vella</td>
+<td>Europe</td>
+<td>79824.00</td>
+<td>77700.00</td>
+<td>71746.00</td>
+<td>71519.00</td>
+<td>66097.00</td>
+<td>53569.00</td>
+<td>35611.00</td>
+<td>19860.00</td>
+<td>468.00</td>
+<td>170.56</td>
+<td>1.01</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">229</td>
+<td>226</td>
+<td>WLF</td>
+<td>Wallis and Futuna</td>
+<td>Mata-Utu</td>
+<td>Oceania</td>
+<td>11572.00</td>
+<td>11655.00</td>
+<td>12182.00</td>
+<td>13142.00</td>
+<td>14723.00</td>
+<td>13454.00</td>
+<td>11315.00</td>
+<td>9377.00</td>
+<td>142.00</td>
+<td>81.49</td>
+<td>1.00</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">230</td>
+<td>172</td>
+<td>ESH</td>
+<td>Western Sahara</td>
+<td>El Aaiún</td>
+<td>Africa</td>
+<td>575986.00</td>
+<td>556048.00</td>
+<td>491824.00</td>
+<td>413296.00</td>
+<td>270375.00</td>
+<td>178529.00</td>
+<td>116775.00</td>
+<td>76371.00</td>
+<td>266000.00</td>
+<td>2.17</td>
+<td>1.02</td>
+<td>0.01</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">231</td>
+<td>46</td>
+<td>YEM</td>
+<td>Yemen</td>
+<td>Sanaa</td>
+<td>Asia</td>
+<td>33696614.00</td>
+<td>32284046.00</td>
+<td>28516545.00</td>
+<td>24743946.00</td>
+<td>18628700.00</td>
+<td>13375121.00</td>
+<td>9204938.00</td>
+<td>6843607.00</td>
+<td>527968.00</td>
+<td>63.82</td>
+<td>1.02</td>
+<td>0.42</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">232</td>
+<td>63</td>
+<td>ZMB</td>
+<td>Zambia</td>
+<td>Lusaka</td>
+<td>Africa</td>
+<td>20017675.00</td>
+<td>18927715.00</td>
+<td>NaN</td>
+<td>13792086.00</td>
+<td>9891136.00</td>
+<td>7686401.00</td>
+<td>5720438.00</td>
+<td>4281671.00</td>
+<td>752612.00</td>
+<td>26.60</td>
+<td>1.03</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">233</td>
+<td>74</td>
+<td>ZWE</td>
+<td>Zimbabwe</td>
+<td>Harare</td>
+<td>Africa</td>
+<td>16320537.00</td>
+<td>15669666.00</td>
+<td>14154937.00</td>
+<td>12839771.00</td>
+<td>11834676.00</td>
+<td>10113893.00</td>
+<td>7049926.00</td>
+<td>5202918.00</td>
+<td>390757.00</td>
+<td>41.77</td>
+<td>1.02</td>
+<td>0.20</td>
+</tr>
+</tbody>
+</table>
+
+<p>234 rows × 17 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 234 entries, 0 to 233
+Data columns (total 17 columns):
+ #   Column                       Non-Null Count  Dtype  
+---  ------                       --------------  -----  
+ 0   Rank                         234 non-null    int64  
+ 1   CCA3                         234 non-null    object 
+ 2   Country                      234 non-null    object 
+ 3   Capital                      234 non-null    object 
+ 4   Continent                    234 non-null    object 
+ 5   2022 Population              230 non-null    float64
+ 6   2020 Population              233 non-null    float64
+ 7   2015 Population              230 non-null    float64
+ 8   2010 Population              227 non-null    float64
+ 9   2000 Population              227 non-null    float64
+ 10  1990 Population              229 non-null    float64
+ 11  1980 Population              229 non-null    float64
+ 12  1970 Population              230 non-null    float64
+ 13  Area (km²)                   232 non-null    float64
+ 14  Density (per km²)            230 non-null    float64
+ 15  Growth Rate                  232 non-null    float64
+ 16  World Population Percentage  234 non-null    float64
+dtypes: float64(12), int64(1), object(4)
+memory usage: 31.2+ KB</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Rank</th>
+<th data-quarto-table-cell-role="th">2022 Population</th>
+<th data-quarto-table-cell-role="th">2020 Population</th>
+<th data-quarto-table-cell-role="th">2015 Population</th>
+<th data-quarto-table-cell-role="th">2010 Population</th>
+<th data-quarto-table-cell-role="th">2000 Population</th>
+<th data-quarto-table-cell-role="th">1990 Population</th>
+<th data-quarto-table-cell-role="th">1980 Population</th>
+<th data-quarto-table-cell-role="th">1970 Population</th>
+<th data-quarto-table-cell-role="th">Area (km²)</th>
+<th data-quarto-table-cell-role="th">Density (per km²)</th>
+<th data-quarto-table-cell-role="th">Growth Rate</th>
+<th data-quarto-table-cell-role="th">World Population Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>234.00</td>
+<td>230.00</td>
+<td>233.00</td>
+<td>230.00</td>
+<td>227.00</td>
+<td>227.00</td>
+<td>229.00</td>
+<td>229.00</td>
+<td>230.00</td>
+<td>232.00</td>
+<td>230.00</td>
+<td>232.00</td>
+<td>234.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>117.50</td>
+<td>34632250.88</td>
+<td>33600710.95</td>
+<td>32066004.16</td>
+<td>30270164.48</td>
+<td>26840495.26</td>
+<td>19330463.93</td>
+<td>16282884.78</td>
+<td>15866499.13</td>
+<td>581663.75</td>
+<td>456.81</td>
+<td>1.01</td>
+<td>0.43</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>67.69</td>
+<td>137889172.44</td>
+<td>135873196.61</td>
+<td>131507146.34</td>
+<td>126074183.54</td>
+<td>113352454.57</td>
+<td>81309624.96</td>
+<td>69345465.54</td>
+<td>68355859.75</td>
+<td>1769133.06</td>
+<td>2083.74</td>
+<td>0.01</td>
+<td>1.71</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>1.00</td>
+<td>510.00</td>
+<td>520.00</td>
+<td>564.00</td>
+<td>596.00</td>
+<td>651.00</td>
+<td>700.00</td>
+<td>733.00</td>
+<td>752.00</td>
+<td>1.00</td>
+<td>0.03</td>
+<td>0.91</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>59.25</td>
+<td>419738.50</td>
+<td>406471.00</td>
+<td>394295.00</td>
+<td>382726.50</td>
+<td>329470.00</td>
+<td>261928.00</td>
+<td>223752.00</td>
+<td>145880.50</td>
+<td>2567.25</td>
+<td>36.60</td>
+<td>1.00</td>
+<td>0.01</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>117.50</td>
+<td>5762857.00</td>
+<td>5456681.00</td>
+<td>5244415.00</td>
+<td>4889741.00</td>
+<td>4491202.00</td>
+<td>3785847.00</td>
+<td>3135123.00</td>
+<td>2511718.00</td>
+<td>77141.00</td>
+<td>95.35</td>
+<td>1.01</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>175.75</td>
+<td>22653719.00</td>
+<td>21522626.00</td>
+<td>19730853.75</td>
+<td>16825852.50</td>
+<td>15625467.00</td>
+<td>11882762.00</td>
+<td>9817257.00</td>
+<td>8817329.00</td>
+<td>414643.25</td>
+<td>236.88</td>
+<td>1.02</td>
+<td>0.28</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>234.00</td>
+<td>1425887337.00</td>
+<td>1424929781.00</td>
+<td>1393715448.00</td>
+<td>1348191368.00</td>
+<td>1264099069.00</td>
+<td>1153704252.00</td>
+<td>982372466.00</td>
+<td>822534450.00</td>
+<td>17098242.00</td>
+<td>23172.27</td>
+<td>1.07</td>
+<td>17.88</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>Rank                           0
+CCA3                           0
+Country                        0
+Capital                        0
+Continent                      0
+2022 Population                4
+2020 Population                1
+2015 Population                4
+2010 Population                7
+2000 Population                7
+1990 Population                5
+1980 Population                5
+1970 Population                4
+Area (km²)                     2
+Density (per km²)              4
+Growth Rate                    2
+World Population Percentage    0
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>Rank                           234
+CCA3                           234
+Country                        234
+Capital                        234
+Continent                        6
+2022 Population                230
+2020 Population                233
+2015 Population                230
+2010 Population                227
+2000 Population                227
+1990 Population                229
+1980 Population                229
+1970 Population                230
+Area (km²)                     231
+Density (per km²)              230
+Growth Rate                    178
+World Population Percentage     70
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.sort_values(by<span class="op">=</span><span class="st">"World Population Percentage"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="66">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Rank</th>
+<th data-quarto-table-cell-role="th">CCA3</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Capital</th>
+<th data-quarto-table-cell-role="th">Continent</th>
+<th data-quarto-table-cell-role="th">2022 Population</th>
+<th data-quarto-table-cell-role="th">2020 Population</th>
+<th data-quarto-table-cell-role="th">2015 Population</th>
+<th data-quarto-table-cell-role="th">2010 Population</th>
+<th data-quarto-table-cell-role="th">2000 Population</th>
+<th data-quarto-table-cell-role="th">1990 Population</th>
+<th data-quarto-table-cell-role="th">1980 Population</th>
+<th data-quarto-table-cell-role="th">1970 Population</th>
+<th data-quarto-table-cell-role="th">Area (km²)</th>
+<th data-quarto-table-cell-role="th">Density (per km²)</th>
+<th data-quarto-table-cell-role="th">Growth Rate</th>
+<th data-quarto-table-cell-role="th">World Population Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41</td>
+<td>1</td>
+<td>CHN</td>
+<td>China</td>
+<td>Beijing</td>
+<td>Asia</td>
+<td>1425887337.00</td>
+<td>1424929781.00</td>
+<td>1393715448.00</td>
+<td>1348191368.00</td>
+<td>1264099069.00</td>
+<td>1153704252.00</td>
+<td>982372466.00</td>
+<td>822534450.00</td>
+<td>9706961.00</td>
+<td>146.89</td>
+<td>1.00</td>
+<td>17.88</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">92</td>
+<td>2</td>
+<td>IND</td>
+<td>India</td>
+<td>New Delhi</td>
+<td>Asia</td>
+<td>1417173173.00</td>
+<td>1396387127.00</td>
+<td>1322866505.00</td>
+<td>1240613620.00</td>
+<td>1059633675.00</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>557501301.00</td>
+<td>3287590.00</td>
+<td>431.07</td>
+<td>1.01</td>
+<td>17.77</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">221</td>
+<td>3</td>
+<td>USA</td>
+<td>United States</td>
+<td>Washington, D.C.</td>
+<td>North America</td>
+<td>338289857.00</td>
+<td>335942003.00</td>
+<td>324607776.00</td>
+<td>311182845.00</td>
+<td>282398554.00</td>
+<td>248083732.00</td>
+<td>223140018.00</td>
+<td>200328340.00</td>
+<td>9372610.00</td>
+<td>36.09</td>
+<td>1.00</td>
+<td>4.24</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">93</td>
+<td>4</td>
+<td>IDN</td>
+<td>Indonesia</td>
+<td>Jakarta</td>
+<td>Asia</td>
+<td>275501339.00</td>
+<td>271857970.00</td>
+<td>259091970.00</td>
+<td>244016173.00</td>
+<td>214072421.00</td>
+<td>182159874.00</td>
+<td>148177096.00</td>
+<td>115228394.00</td>
+<td>1904569.00</td>
+<td>144.65</td>
+<td>1.01</td>
+<td>3.45</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">156</td>
+<td>5</td>
+<td>PAK</td>
+<td>Pakistan</td>
+<td>Islamabad</td>
+<td>Asia</td>
+<td>235824862.00</td>
+<td>227196741.00</td>
+<td>210969298.00</td>
+<td>194454498.00</td>
+<td>154369924.00</td>
+<td>115414069.00</td>
+<td>80624057.00</td>
+<td>59290872.00</td>
+<td>881912.00</td>
+<td>267.40</td>
+<td>1.02</td>
+<td>2.96</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">149</td>
+<td>6</td>
+<td>NGA</td>
+<td>Nigeria</td>
+<td>Abuja</td>
+<td>Africa</td>
+<td>218541212.00</td>
+<td>208327405.00</td>
+<td>183995785.00</td>
+<td>160952853.00</td>
+<td>122851984.00</td>
+<td>95214257.00</td>
+<td>72951439.00</td>
+<td>55569264.00</td>
+<td>923768.00</td>
+<td>236.58</td>
+<td>1.02</td>
+<td>2.74</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">27</td>
+<td>7</td>
+<td>BRA</td>
+<td>Brazil</td>
+<td>Brasilia</td>
+<td>South America</td>
+<td>215313498.00</td>
+<td>213196304.00</td>
+<td>205188205.00</td>
+<td>196353492.00</td>
+<td>175873720.00</td>
+<td>150706446.00</td>
+<td>122288383.00</td>
+<td>96369875.00</td>
+<td>8515767.00</td>
+<td>25.28</td>
+<td>1.00</td>
+<td>2.70</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16</td>
+<td>8</td>
+<td>BGD</td>
+<td>Bangladesh</td>
+<td>Dhaka</td>
+<td>Asia</td>
+<td>171186372.00</td>
+<td>167420951.00</td>
+<td>157830000.00</td>
+<td>148391139.00</td>
+<td>129193327.00</td>
+<td>107147651.00</td>
+<td>83929765.00</td>
+<td>67541860.00</td>
+<td>147570.00</td>
+<td>1160.04</td>
+<td>1.01</td>
+<td>2.15</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">171</td>
+<td>9</td>
+<td>RUS</td>
+<td>Russia</td>
+<td>Moscow</td>
+<td>Europe</td>
+<td>144713314.00</td>
+<td>145617329.00</td>
+<td>144668389.00</td>
+<td>143242599.00</td>
+<td>146844839.00</td>
+<td>148005704.00</td>
+<td>138257420.00</td>
+<td>130093010.00</td>
+<td>17098242.00</td>
+<td>8.46</td>
+<td>1.00</td>
+<td>1.81</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">131</td>
+<td>10</td>
+<td>MEX</td>
+<td>Mexico</td>
+<td>Mexico City</td>
+<td>North America</td>
+<td>127504125.00</td>
+<td>125998302.00</td>
+<td>120149897.00</td>
+<td>112532401.00</td>
+<td>97873442.00</td>
+<td>81720428.00</td>
+<td>67705186.00</td>
+<td>50289306.00</td>
+<td>1964375.00</td>
+<td>64.91</td>
+<td>1.01</td>
+<td>1.60</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\nextm\AppData\Local\Temp\ipykernel_9008\1134722465.py:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
+  df.corr()</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Rank</th>
+<th data-quarto-table-cell-role="th">2022 Population</th>
+<th data-quarto-table-cell-role="th">2020 Population</th>
+<th data-quarto-table-cell-role="th">2015 Population</th>
+<th data-quarto-table-cell-role="th">2010 Population</th>
+<th data-quarto-table-cell-role="th">2000 Population</th>
+<th data-quarto-table-cell-role="th">1990 Population</th>
+<th data-quarto-table-cell-role="th">1980 Population</th>
+<th data-quarto-table-cell-role="th">1970 Population</th>
+<th data-quarto-table-cell-role="th">Area (km²)</th>
+<th data-quarto-table-cell-role="th">Density (per km²)</th>
+<th data-quarto-table-cell-role="th">Growth Rate</th>
+<th data-quarto-table-cell-role="th">World Population Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Rank</td>
+<td>1.00</td>
+<td>-0.36</td>
+<td>-0.36</td>
+<td>-0.35</td>
+<td>-0.35</td>
+<td>-0.34</td>
+<td>-0.33</td>
+<td>-0.33</td>
+<td>-0.34</td>
+<td>-0.38</td>
+<td>0.13</td>
+<td>-0.22</td>
+<td>-0.36</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2022 Population</td>
+<td>-0.36</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.97</td>
+<td>0.45</td>
+<td>-0.03</td>
+<td>-0.02</td>
+<td>1.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2020 Population</td>
+<td>-0.36</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.98</td>
+<td>0.45</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2015 Population</td>
+<td>-0.35</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.98</td>
+<td>0.46</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>1.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2010 Population</td>
+<td>-0.35</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.99</td>
+<td>0.98</td>
+<td>0.46</td>
+<td>-0.03</td>
+<td>-0.04</td>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2000 Population</td>
+<td>-0.34</td>
+<td>0.99</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.99</td>
+<td>0.47</td>
+<td>-0.03</td>
+<td>-0.05</td>
+<td>0.99</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1990 Population</td>
+<td>-0.33</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.52</td>
+<td>-0.03</td>
+<td>-0.07</td>
+<td>0.99</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1980 Population</td>
+<td>-0.33</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.53</td>
+<td>-0.03</td>
+<td>-0.08</td>
+<td>0.99</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1970 Population</td>
+<td>-0.34</td>
+<td>0.97</td>
+<td>0.98</td>
+<td>0.98</td>
+<td>0.98</td>
+<td>0.99</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.51</td>
+<td>-0.03</td>
+<td>-0.08</td>
+<td>0.97</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Area (km²)</td>
+<td>-0.38</td>
+<td>0.45</td>
+<td>0.45</td>
+<td>0.46</td>
+<td>0.46</td>
+<td>0.47</td>
+<td>0.52</td>
+<td>0.53</td>
+<td>0.51</td>
+<td>1.00</td>
+<td>-0.06</td>
+<td>-0.01</td>
+<td>0.45</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Density (per km²)</td>
+<td>0.13</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.06</td>
+<td>1.00</td>
+<td>-0.07</td>
+<td>-0.03</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Growth Rate</td>
+<td>-0.22</td>
+<td>-0.02</td>
+<td>-0.03</td>
+<td>-0.03</td>
+<td>-0.04</td>
+<td>-0.05</td>
+<td>-0.07</td>
+<td>-0.08</td>
+<td>-0.08</td>
+<td>-0.01</td>
+<td>-0.07</td>
+<td>1.00</td>
+<td>-0.02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">World Population Percentage</td>
+<td>-0.36</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.97</td>
+<td>0.45</td>
+<td>-0.03</td>
+<td>-0.02</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df.corr(), annot<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\nextm\AppData\Local\Temp\ipykernel_9008\2951679599.py:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
+  sns.heatmap(df.corr(), annot=True)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="69">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># agrupando o df por continente</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'Continent'</span>).mean().sort_values(by<span class="op">=</span><span class="st">"2022 Population"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\nextm\AppData\Local\Temp\ipykernel_9008\1590826238.py:3: FutureWarning: The default value of numeric_only in DataFrameGroupBy.mean is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  df.groupby('Continent').mean().sort_values(by="2022 Population", ascending=False)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="69">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Rank</th>
+<th data-quarto-table-cell-role="th">2022 Population</th>
+<th data-quarto-table-cell-role="th">2020 Population</th>
+<th data-quarto-table-cell-role="th">2015 Population</th>
+<th data-quarto-table-cell-role="th">2010 Population</th>
+<th data-quarto-table-cell-role="th">2000 Population</th>
+<th data-quarto-table-cell-role="th">1990 Population</th>
+<th data-quarto-table-cell-role="th">1980 Population</th>
+<th data-quarto-table-cell-role="th">1970 Population</th>
+<th data-quarto-table-cell-role="th">Area (km²)</th>
+<th data-quarto-table-cell-role="th">Density (per km²)</th>
+<th data-quarto-table-cell-role="th">Growth Rate</th>
+<th data-quarto-table-cell-role="th">World Population Percentage</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Continent</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Asia</td>
+<td>77.56</td>
+<td>96327387.31</td>
+<td>94955134.37</td>
+<td>89165003.64</td>
+<td>89087770.00</td>
+<td>80580835.11</td>
+<td>48639995.33</td>
+<td>40278333.33</td>
+<td>43839877.83</td>
+<td>642762.82</td>
+<td>1025.02</td>
+<td>1.01</td>
+<td>1.18</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">South America</td>
+<td>97.57</td>
+<td>31201186.29</td>
+<td>30823574.50</td>
+<td>29509599.71</td>
+<td>26789395.54</td>
+<td>25015888.69</td>
+<td>21224743.93</td>
+<td>17270643.29</td>
+<td>13781939.71</td>
+<td>1301302.85</td>
+<td>20.97</td>
+<td>1.01</td>
+<td>0.39</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Africa</td>
+<td>92.16</td>
+<td>25455879.68</td>
+<td>23871435.26</td>
+<td>21419703.57</td>
+<td>18898197.31</td>
+<td>14598365.95</td>
+<td>11376964.52</td>
+<td>8586031.98</td>
+<td>6567175.27</td>
+<td>537879.30</td>
+<td>126.41</td>
+<td>1.02</td>
+<td>0.31</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Europe</td>
+<td>124.50</td>
+<td>15055371.82</td>
+<td>14915843.92</td>
+<td>15027454.12</td>
+<td>14712278.68</td>
+<td>14817685.71</td>
+<td>14785203.94</td>
+<td>14200004.52</td>
+<td>13118479.82</td>
+<td>460208.22</td>
+<td>663.32</td>
+<td>1.00</td>
+<td>0.19</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">North America</td>
+<td>160.93</td>
+<td>15007403.40</td>
+<td>14855914.82</td>
+<td>14259596.25</td>
+<td>13568016.28</td>
+<td>12151739.60</td>
+<td>10531660.62</td>
+<td>9207334.03</td>
+<td>7885865.15</td>
+<td>606104.45</td>
+<td>272.49</td>
+<td>1.00</td>
+<td>0.19</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Oceania</td>
+<td>188.52</td>
+<td>2046386.32</td>
+<td>1910148.96</td>
+<td>1756664.48</td>
+<td>1613163.65</td>
+<td>1357512.09</td>
+<td>1162774.87</td>
+<td>996532.17</td>
+<td>846968.26</td>
+<td>370220.91</td>
+<td>132.54</td>
+<td>1.01</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="82">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df2<span class="op">=</span>df.groupby(<span class="st">'Continent'</span>)[df.columns[<span class="dv">5</span>:<span class="dv">13</span>]].mean().sort_values(by<span class="op">=</span><span class="st">"2022 Population"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df3<span class="op">=</span>df2.transpose()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="83">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#a figura esta comecando com o ano de 2020, mas queremos que comece com 1970, ou seja, precisamos inverter a ordem das variaveis do eixo x</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df3<span class="op">=</span>df3.iloc[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>df3.plot(kind<span class="op">=</span><span class="st">'line'</span>, figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="83">
+<pre><code>&lt;Axes: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-14-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotando o grafico boxplot</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df.boxplot(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<pre><code>&lt;Axes: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df.select_dtypes(include<span class="op">=</span><span class="st">'object'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CCA3</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Capital</th>
+<th data-quarto-table-cell-role="th">Continent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>AFG</td>
+<td>Afghanistan</td>
+<td>Kabul</td>
+<td>Asia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>ALB</td>
+<td>Albania</td>
+<td>Tirana</td>
+<td>Europe</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>DZA</td>
+<td>Algeria</td>
+<td>Algiers</td>
+<td>Africa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>ASM</td>
+<td>American Samoa</td>
+<td>Pago Pago</td>
+<td>Oceania</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>AND</td>
+<td>Andorra</td>
+<td>Andorra la Vella</td>
+<td>Europe</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">229</td>
+<td>WLF</td>
+<td>Wallis and Futuna</td>
+<td>Mata-Utu</td>
+<td>Oceania</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">230</td>
+<td>ESH</td>
+<td>Western Sahara</td>
+<td>El Aaiún</td>
+<td>Africa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">231</td>
+<td>YEM</td>
+<td>Yemen</td>
+<td>Sanaa</td>
+<td>Asia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">232</td>
+<td>ZMB</td>
+<td>Zambia</td>
+<td>Lusaka</td>
+<td>Africa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">233</td>
+<td>ZWE</td>
+<td>Zimbabwe</td>
+<td>Harare</td>
+<td>Africa</td>
+</tr>
+</tbody>
+</table>
+
+<p>234 rows × 4 columns</p>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
